@@ -1,7 +1,7 @@
 <?php
 
 require_once("connection.php");
-
+require_once("includes.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,43 +17,54 @@ require_once("connection.php");
             text-align: center;
         }
 
-        .container {
-
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translateY(-50%) translateX(-50%);
-        }
-
-        form {
+        .form-group {
             margin-left: 330px;
+            float: left;
         }
+
+        .alert.alert-success, .alert.alert-danger {
+    margin-top: 13rem;
+    
+        }
+        button.btn.btn-primary {
+    margin-top: 33px;
+    float: left;
+}
+button.btn.btn-primary.pris {
+    margin-left: -200px;
+    
+}
+button.btn.btn-primary.kurt {
+    margin-left: -340px;
+}
     </style>
 
 </head>
 
 <body>
 
-    <?php require_once("includes.php"); ?>
+   
+
     <div class="container">
         <?php
-        if (isset($_POST["create"])) {
-            if (isset($_POST["username"]) && isset($_POST["password"]) && !empty($_POST["username"]) && !empty($_POST["password"]) && isset($_POST["password2"]) && !empty($_POST["password2"]) && isset($_POST["name"]) && !empty($_POST["name"]) && isset($_POST["surname"]) && !empty($_POST["surname"])) {
-                $username = $_POST["username"];
-                $name = $_POST["name"];
-                $surname = $_POST["surname"];
-                $password = $_POST["password"];
-                $password2 = $_POST["password2"];
 
-                $sql = "SELECT * FROM `uzsiregistrave_vartotojai` WHERE slapyvardis='$username' ";
+        if (isset($_POST["create"])) {
+            if (isset($_POST["slapyvardis"]) && isset($_POST["slaptazodis"]) && !empty($_POST["slapyvardis"]) && !empty($_POST["slaptazodis"]) && isset($_POST["slaptazodis2"]) && !empty($_POST["slaptazodis2"]) && isset($_POST["vardas"]) && !empty($_POST["vardas"]) && isset($_POST["pavarde"]) && !empty($_POST["pavarde"])) {
+                $slapyvardis = $_POST["slapyvardis"];
+                $vardas = $_POST["vardas"];
+                $pavarde = $_POST["pavarde"];
+                $slaptazodis = $_POST["slaptazodis"];
+                $slaptazodis2 = $_POST["slaptazodis2"];
+
+                $sql = "SELECT * FROM `vartotojai` WHERE slapyvardis='$slapyvardis' ";
        $result = $prisijungimas->query($sql);
        $class= "danger";
        if($result->num_rows == 1) {
            $message = "Toks slapyvardis jau egzistuoja.";
        } else {
-                if ($password == $password2) {
-                    $sql = "INSERT INTO `uzsiregistrave_vartotojai`(`name`, `slapyvardis`, `slaptazodis`, `teises_id`, `surname`) 
-            VALUES ('$name','$username','$password',0,'$surname')";
+                if ($slaptazodis == $slaptazodis2) {
+                    $sql = "INSERT INTO `vartotojai`(`vardas`, `slapyvardis`, `slaptazodis`, `teises_id`, `pavarde`, `registracijos_data`, `paskutinis_prisijungimas` ) 
+            VALUES ('$vardas','$slapyvardis','$slaptazodis',5,'$pavarde', (NOW()), (NOW()) )";
                     if (mysqli_query($prisijungimas, $sql)) {
                         $message =  "Paskyra sukurta sėkmingai. Prašome prisijungti.";
                         $class = "success";
@@ -68,6 +79,7 @@ require_once("connection.php");
             }
         }
     }
+
         ?>
         <?php
         if (!isset($_COOKIE["prisijungta"])) { ?>
@@ -76,10 +88,10 @@ require_once("connection.php");
             <form action="registracija.php" method="POST">
 
                 <div class="form-group">
-                    <label for="username">Slapyvardis</label>
-                    <input type="text" name="username" required="true" value="<?php 
-                    if(isset($username)) {
-                        echo $username;                        
+                    <label for="slapyvardis">Slapyvardis</label>
+                    <input type="text" name="slapyvardis" required="true" value="<?php 
+                    if(isset($slapyvardis)) {
+                        echo $slapyvardis;                        
                         ?>"<?php
                     } else {
                         echo "";
@@ -87,10 +99,10 @@ require_once("connection.php");
                     }?>/>
                 </div>
                 <div class="form-group">
-                    <label for="name">Vardas</label>
-                    <input type="text" name="name" required="true" value="<?php 
-                    if(isset($name)) {
-                        echo $name;
+                    <label for="vardas">Vardas</label>
+                    <input type="text" name="vardas" required="true" value="<?php 
+                    if(isset($vardas)) {
+                        echo $vardas;
                         ?>"<?php
                     } else {
                         echo "";
@@ -99,10 +111,10 @@ require_once("connection.php");
                    />
                 </div>
                 <div class="form-group">
-                    <label for="surname">Pavardė</label>
-                    <input type="text" name="surname" required="true" value="<?php 
-                    if(isset($surname)) {
-                        echo $surname;                        
+                    <label for="pavarde">Pavardė</label>
+                    <input type="text" name="pavarde" required="true" value="<?php 
+                    if(isset($pavarde)) {
+                        echo $pavarde;                        
                         ?>"<?php
                     } else {
                         echo "";
@@ -110,28 +122,29 @@ require_once("connection.php");
                     }?>/>
                 </div>
                 <div class="form-group">
-                    <label for="password">Slaptažodis</label>
-                    <input type="password" name="password" placeholder="Įveskite slaptažodį" />
+                    <label for="slaptazodis">Slaptažodis</label>
+                    <input type="password" name="slaptazodis" placeholder="Įveskite slaptažodį" />
                 </div>
                 <div class="form-group">
-                    <label for="password">pakartokite slaptažodį</label>
-                    <input type="password" name="password2" placeholder="Pakartokite slaptažodį" />
+                    <label for="slaptazodis">pakartokite slaptažodį</label>
+                    <input type="password" name="slaptazodis2" placeholder="Pakartokite slaptažodį" />
                 </div>
 
-                <button class="btn btn-primary" type="submit" name="create">Užsiregistruoti</button>
+                <button class="btn btn-primary kurt" type="submit" name="create">Užsiregistruoti</button>
                 <br><br>
-                <?php if (isset($message)) { ?>
-                    <div class="alert alert-<?php echo $class; ?>" role="alert"><?php echo $message; ?></div>
-
-                <?php }
-
-                ?>
+                
 
 
             </form>
             <form action="registracija.php" method="POST">
-                <button class="btn btn-primary" type="submit" name="prisijungti">Prisijungti</button>     
-            </form>           
+                <button class="btn btn-primary pris" type="submit" name="prisijungti" ><a class='mygt' href='index.php'>Prisijungti</button>     
+            </form> 
+             <?php if (isset($message)) { ?>
+                    <div class="alert alert-<?php echo $class; ?>" role="alert"><?php echo $message; ?></div>
+
+                <?php }
+
+                ?>         
     </div>
 
 <?php
@@ -143,9 +156,9 @@ require_once("connection.php");
 if (isset($_COOKIE["prisijungta"])) {
     header('Location: klientai.php');
 }
-if (isset($_POST["prisijungti"])) {
-    header('Location: index.php');
-}
+// if (isset($_POST["prisijungti"])) {
+//     header('Location: index.php');
+// }
 
 ?>
 

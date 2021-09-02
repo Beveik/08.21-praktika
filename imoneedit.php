@@ -126,7 +126,7 @@ if(isset($_GET["submit"])) {
                                 echo "<option value='".$clientRights["ID"]."'>";
                             }  
                                 
-                                echo $clientRights["aprasymas"];
+                                echo $clientRights["im_aprasymas"];
                             echo "</option>";
                        }
                         ?>

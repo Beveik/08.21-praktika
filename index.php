@@ -27,31 +27,50 @@ require_once("connection.php");
             transform: translateY(-50%) translateX(-50%);
         }
 
-        form {
-            margin-left: 330px;
+        .button.btn.btn-primary {
+            float: left;
+            margin-right: auto;
         }
 
-        button.btn.btn-primary {
-            margin-left: 0px;
+        /* .form-group {
+            float: left;
+            margin-left: 330px;
+        } */
+        .jungtis {
+            float: left;
+            margin-top: 35px;
+            margin-left: -230px;
+        }
+
+        .alert.alert-success,
+        .alert.alert-danger {
+            margin-top: 8rem;
+
+        }
+
+        .form-group {
+            float: left;
+            margin-left: 330px;
         }
     </style>
 </head>
 
 <body>
+
     <?php
-    if (isset($_GET["submit"])) {
-        if (isset($_GET["username"]) && isset($_GET["password"]) && !empty($_GET["username"]) && !empty($_GET["password"])) {
-            $username = $_GET["username"];
-            $password = $_GET["password"];
+    if (isset($_POST["submit"])) {
+        if (isset($_POST["slapyvardis"]) && isset($_POST["slaptazodis"]) && !empty($_POST["slapyvardis"]) && !empty($_POST["slaptazodis"])) {
+            $slapyvardis = $_POST["slapyvardis"];
+            $slaptazodis = $_POST["slaptazodis"];
 
 
-            $sql = "SELECT * FROM `uzsiregistrave_vartotojai` WHERE slapyvardis='$username' AND slaptazodis='$password'";
+            $sql = "SELECT * FROM `vartotojai` WHERE slapyvardis='$slapyvardis' AND slaptazodis='$slaptazodis'";
             $result = $prisijungimas->query($sql);
 
             if ($result->num_rows == 1) {
 
                 $user_info = mysqli_fetch_array($result);
-                var_dump($user_info);
+                // var_dump($user_info);
                 $cookie_array = array(
                     $user_info["ID"],
                     $user_info["slapyvardis"],
@@ -64,9 +83,8 @@ require_once("connection.php");
             } else {
                 $message = "Neteisingi prisijungimo duomenys.";
             }
-
         } else {
-            $message = "Laukeliai yra tušti arba duomenys neteisingi";
+            $message = "Laukeliai yra tušti arba duomenys neteisingi.";
         }
     }
 
@@ -77,19 +95,20 @@ require_once("connection.php");
         <div class="container">
             <h1>Klientų valdymo sistema</h1>
             <br>
-            <form>
+            <form action="index.php" method="post">
                 <div class="form-group">
-                    <label for="username">Slapyvardis</label>
-                    <input type="text" name="username" />
+                    <label for="slapyvardis">Slapyvardis</label>
+                    <input type="text" name="slapyvardis" />
                 </div>
                 <div class="form-group">
-                    <label for="password">Slaptažodis</label>
-                    <input type="password" name="password" />
+                    <label for="slaptazodis">Slaptažodis</label>
+                    <input type="password" name="slaptazodis" />
                 </div>
+                <div class="jungtis">
+                    <button class="btn btn-primary" type="submit" name="submit">Prisijungti</button>
 
-                <button class="btn btn-primary" type="submit" name="submit">Prisijungti</button>
-                <!-- <br><br> -->
-                <button class="btn btn-primary" type="submit" name="create">Registracija</button>
+                    <button class="btn btn-primary" type="submit" name="create"><a class='mygt' href='registracija.php'>Užsiregistruoti</button>
+                </div>
             </form>
             <?php
             if (isset($message)) { ?>
@@ -99,16 +118,24 @@ require_once("connection.php");
             }
         }
         ?>
-        </div>
         <?php
-        if (isset($_GET["create"])) {
-            header('Location: registracija.php');
+
+        if (isset($_POST["create"])) {
+            $sql = "SELECT * FROM `registracija` WHERE `ID`=1 AND `isjungimas`='ijungta' ";
+            $result = $prisijungimas->query($sql);
+
+            if ($result->num_rows == 1) {
+                // <div class="alert alert-success" role="alert">Registracija galima</div> 
+                // header('Location: registracija.php');
+            } else { ?>
+                <!-- <div class="container-uzdaryta"> -->
+                <div class="alert alert-danger" role="alert">Šiuo metu registracija yra uždaryta.<br>Atsiprašome už nepatogumus.</div>
+                <!-- </div> -->
+        <?php }
         }
-
-
-
-
         ?>
+        </div>
+
 
 </body>
 
