@@ -64,7 +64,7 @@ button.btn.btn-primary.kurt {
        } else {
                 if ($slaptazodis == $slaptazodis2) {
                     $sql = "INSERT INTO `vartotojai`(`vardas`, `slapyvardis`, `slaptazodis`, `teises_id`, `pavarde`, `registracijos_data`, `paskutinis_prisijungimas` ) 
-            VALUES ('$vardas','$slapyvardis','$slaptazodis',5,'$pavarde', (NOW()), (NOW()) )";
+            VALUES ('$vardas','$slapyvardis','$slaptazodis',2,'$pavarde', (NOW()), (NOW()) )";
                     if (mysqli_query($prisijungimas, $sql)) {
                         $message =  "Paskyra sukurta sėkmingai. Prašome prisijungti.";
                         $class = "success";

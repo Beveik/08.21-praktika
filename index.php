@@ -78,7 +78,7 @@ require_once("connection.php");
                     $user_info["teises_id"]
                 );
                 $cookie_array = implode("|", $cookie_array);
-                setcookie("prisijungta", $cookie_array, time() + 3600, "/");
+                setcookie("prisijungta", $cookie_array, time() + 36000, "/");
                 header("Location: klientai.php");
                 $sql =  "UPDATE `vartotojai` SET `paskutinis_prisijungimas`=now() WHERE slapyvardis='$slapyvardis' AND slaptazodis='$slaptazodis'";
                 $result = $prisijungimas->query($sql);

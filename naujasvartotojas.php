@@ -123,6 +123,7 @@ echo "<a href='klientai.php'>Atgal</a>";
                         ?>
                     </select>
                 </div>
+                
 <button class="btn btn-primary" type="submit" name="submit">Pridėti vartotoją</button><br>
                 <a href="vartotojai.php">Back</a>
                 

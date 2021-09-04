@@ -99,6 +99,10 @@ if(isset($_GET["submit"])) {
                         ?>
                     </select>
                 </div>
+                <div class="form-group">
+                <label for="aprasymas">Aprašymas</label>
+                <textarea class="form-control" name="aprasymas"></textarea>
+                </div>
                 <br>
                 <div class="form-group">
 <button class="btn btn-primary" type="submit" name="submit">Pridėti įmonę</button><br>

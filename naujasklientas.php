@@ -23,14 +23,14 @@
             top:45%;
             left:50%;
             transform: translateY(-50%) translateX(-50%);
-            width: 500px;
+            width: 765px;
         }
 
         .hide {
             display:none;
         }
         .form-control {
-            width: 500px;
+            width: 730px;
         }
     </style>
 
@@ -45,15 +45,16 @@ if(!isset($_COOKIE["prisijungta"])) {
 
 
 if(isset($_GET["submit"])) {
-    if(isset($_GET["vardas"]) && isset($_GET["pavarde"]) && isset($_GET["teises_id"]) && !empty($_GET["vardas"]) && !empty($_GET["pavarde"]) ) {
+    if(isset($_GET["vardas"]) && isset($_GET["pavarde"]) && isset($_GET["teises_id"]) && !empty($_GET["vardas"]) && !empty($_GET["pavarde"] && isset($_GET["aprasymas"])) ) {
 
         $vardas = $_GET["vardas"];
         $pavarde = $_GET["pavarde"];
         $teises_id = intval($_GET["teises_id"]);
+        $aprasymas = $_GET["aprasymas"];
 
         // $sql = "UPDATE `klientai` SET `vardas`='$vardas',`pavarde`='$pavarde',`teises_id`=$teises_id WHERE ID = $id";
 
-        $sql = "INSERT INTO `klientai`(`vardas`, `pavarde`, `teises_id`) VALUES ('$vardas','$pavarde',$teises_id)";
+        $sql = "INSERT INTO `klientai`(`vardas`, `pavarde`, `teises_id`, `aprasymas`) VALUES ('$vardas','$pavarde',$teises_id, '$aprasymas')";
         if(mysqli_query($prisijungimas, $sql)) {
             $message =  "Vartotojas pridėtas sėkmingai.";
             $class = "success";
@@ -70,7 +71,7 @@ if(isset($_GET["submit"])) {
 ?>
 
 <div class="container">
-        <h1>Vartotojo kūrimas</h1>
+        <h1>Kliento kūrimas</h1>
             <form action="naujasklientas.php" method="get">
 
                 <div class="form-group">
@@ -79,7 +80,7 @@ if(isset($_GET["submit"])) {
                 </div>
                 <div class="form-group">
                     <label for="pavarde">Pavardė</label>
-                    <input class="form-control" type="text" name="pavarde" placeholder="Pavarde" />
+                    <input class="form-control" type="text" name="pavarde" placeholder="Pavardė" />
                 </div>
                 <div class="form-group">
                     <label for="teises_id">Teisės</label>
@@ -97,6 +98,15 @@ if(isset($_GET["submit"])) {
                         ?>
                     </select>
                 </div>
+                <div class="form-group">
+                <label for="aprasymas">Aprašymas</label>
+                <div class="row">
+
+                        <div class="col-lg-12">
+                <textarea id="summernote" name="editordata" class="form-control" name="aprasymas"></textarea>
+                </div>
+                </div>
+                </div>
 <button class="btn btn-primary" type="submit" name="submit">Pridėti klientą</button><br>
                 <a href="klientai.php">Back</a>
                 
@@ -107,7 +117,11 @@ if(isset($_GET["submit"])) {
                 <?php echo $message; ?>
                 </div>
             <?php } ?>
-        
+            <script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+  </script>
               
     </div>
 </body>
