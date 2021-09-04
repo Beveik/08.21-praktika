@@ -126,7 +126,7 @@ button.btn.btn-primary.kurt {
                     <input type="password" name="slaptazodis" placeholder="Įveskite slaptažodį" />
                 </div>
                 <div class="form-group">
-                    <label for="slaptazodis">pakartokite slaptažodį</label>
+                    <label for="slaptazodis">Pakartokite slaptažodį</label>
                     <input type="password" name="slaptazodis2" placeholder="Pakartokite slaptažodį" />
                 </div>
 
@@ -138,7 +138,9 @@ button.btn.btn-primary.kurt {
             </form>
             <form action="registracija.php" method="POST">
                 <button class="btn btn-primary pris" type="submit" name="prisijungti" ><a class='mygt' href='index.php'>Prisijungti</button>     
-            </form> 
+            </form>
+            
+            
              <?php if (isset($message)) { ?>
                     <div class="alert alert-<?php echo $class; ?>" role="alert"><?php echo $message; ?></div>
 

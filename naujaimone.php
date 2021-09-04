@@ -23,10 +23,16 @@
             top:50%;
             left:50%;
             transform: translateY(-50%) translateX(-50%);
+            width: 500px;
+            
         }
 
         .hide {
             display:none;
+        }
+
+        .form-control {
+            width: 500px;
         }
     </style>
 
@@ -66,13 +72,14 @@ if(isset($_GET["submit"])) {
 ?>
 
 <div class="container">
-        <h1>Įmonės pridėjimas</h1>
+        <h1>Įmonės pridėjimas</h1><br>
             <form action="naujaimone.php" method="get">
 
                 <div class="form-group">
                     <label for="pavadinimas">Pavadinimas</label>
                     <input class="form-control" type="text" name="pavadinimas" placeholder="Pavadinimas" />
                 </div>
+               
                 <div class="form-group">
                     <label for="aprasymas">Aprašymas</label>
                     <input class="form-control" type="text" name="aprasymas" placeholder="Aprašymas" />
@@ -92,9 +99,11 @@ if(isset($_GET["submit"])) {
                         ?>
                     </select>
                 </div>
+                <br>
+                <div class="form-group">
 <button class="btn btn-primary" type="submit" name="submit">Pridėti įmonę</button><br>
                 <a href="imones.php">Back</a>
-                
+                </div>
             </form>
 
             <?php if(isset($message)) { ?>

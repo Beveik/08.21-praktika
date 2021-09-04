@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clients Edit</title>
+    <title>Kliento redagavimas</title>
 
     <?php require_once("includes.php"); 
     require_once("includes/menu.php");?>
@@ -23,9 +23,11 @@
             top:50%;
             left:50%;
             transform: translateY(-50%) translateX(-50%);
-            
+            width: 500px;
         }
-
+        .form-control {
+            width: 500px;
+        }
         .hide {
             display:none;
         }
@@ -103,7 +105,7 @@ if(isset($_GET["submit"])) {
 ?>
 
 <div class="container">
-        <h1>Vartotojo redagavimas</h1>
+        <h1>Kliento redagavimas</h1> <br>
         <?php if($hideForm == false) { ?>
             <form action="klientaiedit.php" method="get">
                 

@@ -17,16 +17,30 @@
         h1 {
             text-align: center;
         }
+     <?php   if ($vartotojas[3]==2){ ?>
+        .container {
+            position: absolute;
+            float: right;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+   <?php } else { ?>
 
         .container {
             position:absolute;
             top:60%;
             left:50%;
             transform: translateY(-50%) translateX(-50%);
+            width: 500px;
+            
         }
-
+        <?php } ?>
         .hide {
             display:none;
+        }
+        .form-control {
+            width: 500px;
         }
     </style>
 
@@ -69,6 +83,12 @@ if(isset($_GET["submit"])) {
 ?>
 
 <div class="container">
+<?php
+
+if ($vartotojas[3]==2){ 
+echo "<a href='klientai.php'>Atgal</a>";
+     } else {?> 
+
         <h1>Vartotojo kūrimas</h1>
             <form action="naujasvartotojas.php" method="get">
 
@@ -114,7 +134,7 @@ if(isset($_GET["submit"])) {
                 </div>
             <?php } ?>
         
-              
+              <?php } ?>
     </div>
 </body>
 </html>

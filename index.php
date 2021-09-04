@@ -80,6 +80,8 @@ require_once("connection.php");
                 $cookie_array = implode("|", $cookie_array);
                 setcookie("prisijungta", $cookie_array, time() + 3600, "/");
                 header("Location: klientai.php");
+                $sql =  "UPDATE `vartotojai` SET `paskutinis_prisijungimas`=now() WHERE slapyvardis='$slapyvardis' AND slaptazodis='$slaptazodis'";
+                $result = $prisijungimas->query($sql);
             } else {
                 $message = "Neteisingi prisijungimo duomenys.";
             }
@@ -121,16 +123,14 @@ require_once("connection.php");
         <?php
 
         if (isset($_POST["create"])) {
-            $sql = "SELECT * FROM `registracija` WHERE `ID`=1 AND `isjungimas`='ijungta' ";
+            $sql = "SELECT * FROM `registracija` WHERE `ID`=1 AND `isjungimas`=1 ";
             $result = $prisijungimas->query($sql);
 
             if ($result->num_rows == 1) {
                 // <div class="alert alert-success" role="alert">Registracija galima</div> 
                 // header('Location: registracija.php');
             } else { ?>
-                <!-- <div class="container-uzdaryta"> -->
                 <div class="alert alert-danger" role="alert">Šiuo metu registracija yra uždaryta.<br>Atsiprašome už nepatogumus.</div>
-                <!-- </div> -->
         <?php }
         }
         ?>

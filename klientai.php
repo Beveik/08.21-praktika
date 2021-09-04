@@ -52,36 +52,10 @@ require_once("includes.php");
     
     <div class="naujas">
         <form action="klientai.php" method="get">
-            <!-- <div class="form-group"> -->
+            
                 <button class='btn btn-primary' type='submit' name='naujas'><a class="mygt" href='naujasklientas.php'>Naujas klientas</a></button>
-                <!-- <a class="btn btn-primary mygt" href='naujasklientas.php'>Naujas klientas</a> -->
-                <!-- <a href='naujasklientas.php'>
-    <button class='btn btn-primary' type='submit' name='naujas'>Naujas klientas</button>
-</a> -->
-            <!-- </div> -->
-
  </form>
 </div>
-        <?php
-
-        // if (!isset($_COOKIE["prisijungta"])) {
-        //     // header("Location: index.php");
-        // } else {
-        //     $vartotojas=explode("|", $_COOKIE["prisijungta"]);
-        //     echo "<h5>Sveiki prisijungę!</h5><br>";
-        //     echo "<form action='klientai.php' class='atsijungti' method ='get'>";
-        //     echo "<br><button class='btn btn-primary' type='submit' name='atsijungti'><a class='mygt' href='index.php'>Atsijungti</a></button>";
-        //     echo "</form><br>";
-        //     if (isset($_GET["logout"])) {
-
-        //         setcookie("prisijungta", "", time() - 3600, "/");
-        //         // header("Location: index.php");
-        //         // echo "<a href='index.php'></a>";
-               
-        //     }
-        // }
-        ?>
-
 
         <?php
 if ($vartotojas[3]!=3){ 

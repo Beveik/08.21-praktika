@@ -32,7 +32,10 @@ echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0
         a.btn.btn-primary {
     margin-left: -215px;
     margin-top: -3px;
+    /* margin-left: -95px; */
+    
 }
+
 .isvalyti {
     /* margin-left: -215px; */
     margin-bottom: 10x;
